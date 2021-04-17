@@ -21,7 +21,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, Data, SetupContext, reactive, ref } from '@vue/composition-api'
+import { defineComponent, Data, SetupContext, ref } from '@vue/composition-api'
+let self: any = null
 export default defineComponent({
   setup (_props: Data, _context: SetupContext) {
     const result = ref(null)
@@ -34,13 +35,16 @@ export default defineComponent({
       { text: 'Recovered', value: 'recovered' }
     ]
     function test () {
-      this.$axios.get('https://disease.sh/v3/covid-19/gov/India').then((res) => {
-        console.log(res.data)
+      self.$axios.get('https://disease.sh/v3/covid-19/gov/India').then((res:any) => {
+        // console.log(res.data)
         result.value = res.data
-        console.log(result)
+        // console.log(result)
       })
     }
     return { test, result, stateHeaders, search }
+  },
+  created () {
+    self = this
   }
 })
 </script>
