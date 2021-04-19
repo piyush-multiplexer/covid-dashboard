@@ -1,25 +1,35 @@
 <template>
-  <v-row>
-    <v-col cols="12">
-      <v-card>
-        <v-card-title class="headline">
-          <div>
-            COVID Overall Data (India)
-            <v-btn @click="test">
-              GET DATA<v-icon small>
-                mdi-refresh
-              </v-icon>
-            </v-btn>
-          </div>
-          <v-spacer />
-          <v-text-field v-model="search" hide-details label="Search by state" outlined dense />
-        </v-card-title>
-        <v-data-table v-if="result" :search="search" :headers="stateHeaders" :items="result.states" />
-      </v-card>
-    </v-col>
-  </v-row>
+  <el-row>
+    <el-col :span="12">
+      <el-card>
+        <el-row slot="header" class="clearfix">
+          <el-col :span="12">
+            <span>COVID Overall Data (India)</span>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col class="ml-2" :span="9">
+            <el-input v-model="search" placeholder="Search by state" />
+          </el-col>
+          <el-col :span="3">
+            <el-button @click="test">
+              Get Data
+            </el-button>
+          </el-col>
+        </el-row>
+        <el-table v-if="result" :search="search" :data="result.states">
+          <el-table-column
+            v-for="(column,index) in stateHeaders"
+            :key="index"
+            :prop="column.value"
+            :label="column.text"
+            :width="column.width"
+          />
+        </el-table>
+      </el-card>
+    </el-col>
+  </el-row>
 </template>
-
 <script lang="ts">
 import { defineComponent, Data, SetupContext, ref } from '@vue/composition-api'
 let self: any = null
@@ -28,11 +38,11 @@ export default defineComponent({
     const result = ref(null)
     const search = ref(null)
     const stateHeaders = [
-      { text: 'State', value: 'state' },
-      { text: 'Cases', value: 'cases' },
-      { text: 'Active', value: 'active' },
-      { text: 'Deaths', value: 'deaths' },
-      { text: 'Recovered', value: 'recovered' }
+      { text: 'State', value: 'state', width: 350 },
+      { text: 'Cases', value: 'cases', width: 100 },
+      { text: 'Active', value: 'active', width: 100 },
+      { text: 'Deaths', value: 'deaths', width: 100 },
+      { text: 'Recovered', value: 'recovered', width: 100 }
     ]
     function test () {
       self.$axios.get('https://disease.sh/v3/covid-19/gov/India').then((res:any) => {
