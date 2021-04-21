@@ -25,9 +25,9 @@
     "@nuxtjs/composition-api": "^0.23.2",
     "@nuxtjs/vercel-builder": "^0.21.2",
     "core-js": "^3.10.2",
-    "d3": "^6.7.0",
     "element-ui": "^2.15.1",
-    "nuxt": "^2.15.3"
+    "nuxt": "^2.15.3",
+    "vue2-highcharts": "^1.2.5"
   },
   "devDependencies": {
     "@nuxt/types": "^2.15.3",
