@@ -1,6 +1,12 @@
 <template>
   <el-row>
     <el-col :span="12">
+      <no-ssr>
+        <country-historical />
+        <multi-line-chart />
+      </no-ssr>
+    </el-col>
+    <el-col :span="12">
       <el-card>
         <el-row slot="header" class="clearfix">
           <el-col :span="12">
@@ -32,8 +38,11 @@
 </template>
 <script lang="ts">
 import { defineComponent, Data, SetupContext, ref } from '@vue/composition-api'
+import CountryHistorical from '~/components/CountryHistorical.vue'
+import MultiLineChart from '~/components/MultiLineChart.vue'
 let self: any = null
 export default defineComponent({
+  components: { MultiLineChart, CountryHistorical },
   setup (_props: Data, _context: SetupContext) {
     const result = ref(null)
     const search = ref(null)
