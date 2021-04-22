@@ -2,10 +2,10 @@
   <Chart ref="CountryHistorical" :options="options" />
 </template>
 <script lang="js">
-import { defineComponent, ref, onMounted } from '@vue/composition-api'
+import { defineComponent, ref, onMounted } from 'vue'
 let self
 export default defineComponent({
-  setup (_props, _context) {
+  setup () {
     const options = ref({})
     onMounted(() => {
       self.$axios.get('https://disease.sh/v3/covid-19/historical/India?lastdays=all').then(async (res) => {

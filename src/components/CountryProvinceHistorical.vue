@@ -2,10 +2,10 @@
   <Chart ref="lineCharts" :options="options" />
 </template>
 <script lang="js">
-import { defineComponent, ref } from '@vue/composition-api'
+import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
-  setup (_props, _context) {
+  setup () {
     let options = ref({})
     return { options }
   }

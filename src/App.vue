@@ -34,9 +34,9 @@
 </template>
 
 <script>
-import { defineComponent, ref } from '@vue/composition-api'
-import CountryHistorical from '~/components/CountryHistorical.vue'
-import MultiLineChart from '~/components/MultiLineChart.vue'
+import { defineComponent, ref } from 'vue'
+import CountryHistorical from '@/components/CountryHistorical.vue'
+import MultiLineChart from '@/components/MultiLineChart.vue'
 let self
 export default defineComponent({
   components: { MultiLineChart, CountryHistorical },
@@ -51,7 +51,7 @@ export default defineComponent({
       { text: 'Recovered', value: 'recovered', width: 100 }
     ]
     function test () {
-      self.$axios.get('https://disease.sh/v3/covid-19/gov/India').then((res:any) => {
+      self.$axios.get('https://disease.sh/v3/covid-19/gov/India').then((res) => {
         // console.log(res.data)
         result.value = res.data
         // console.log(result)
