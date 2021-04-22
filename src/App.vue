@@ -2,62 +2,69 @@
   <q-layout view="lHh Lpr lFf">
     <q-page-container>
       <country-historical />
-        <multi-line-chart />
-      <el-card>
-        <el-row slot="header" class="clearfix">
-          <el-col :span="12">
-            <span>COVID Overall Data (India)</span>
-          </el-col>
-        </el-row>
-        <el-row>
-          <el-col class="ml-2" :span="9">
-            <el-input v-model="search" placeholder="Search by state" />
-          </el-col>
-          <el-col :span="3">
-            <el-button @click="test">
-              Get Data
-            </el-button>
-          </el-col>
-        </el-row>
-        <el-table v-if="result" :search="search" :data="result.states">
-          <el-table-column
-            v-for="(column,index) in stateHeaders"
-            :key="index"
-            :prop="column.value"
-            :label="column.text"
-            :width="column.width"
-          />
-        </el-table>
-      </el-card>
+      <multi-line-chart />
+      <q-card flat bordered class="my-card">
+        <q-card-section>
+          <div class="text-h6">COVID Overall Data (India)</div>
+        </q-card-section>
+        <q-separator inset />
+        <q-card-section>
+          <q-table
+            title="States"
+            :rows="result.states"
+            :columns="stateHeaders"
+            :filter="search"
+            row-key="name"
+          >
+            <template v-slot:top-right>
+              <q-btn class="q-mr-md" @click="test" label="Get Data" color="primary" />
+              <q-input class="q-ml-md"
+                dense outlined
+                v-model="search"
+                placeholder="Search by state"
+              >
+                <template v-slot:append>
+                  <q-icon name="search" />
+                </template>
+              </q-input>
+            </template>
+          </q-table>
+        </q-card-section>
+      </q-card>
     </q-page-container>
   </q-layout>
 </template>
 
 <script>
-import axios from 'axios'
-import { defineComponent, ref } from 'vue'
-import CountryHistorical from '@/components/CountryHistorical.vue'
-import MultiLineChart from '@/components/MultiLineChart.vue'
+import axios from "axios";
+import { defineComponent, ref } from "vue";
+import CountryHistorical from "@/components/CountryHistorical.vue";
+import MultiLineChart from "@/components/MultiLineChart.vue";
 export default defineComponent({
   components: { MultiLineChart, CountryHistorical },
-  setup () {
-    const result = ref(null)
-    const search = ref(null)
+  setup() {
+    const result = ref({states:[]});
+    const search = ref("");
     const stateHeaders = [
-      { text: 'State', value: 'state', width: 350 },
-      { text: 'Cases', value: 'cases', width: 100 },
-      { text: 'Active', value: 'active', width: 100 },
-      { text: 'Deaths', value: 'deaths', width: 100 },
-      { text: 'Recovered', value: 'recovered', width: 100 }
-    ]
-    function test () {
-      axios.get('https://disease.sh/v3/covid-19/gov/India').then((res) => {
+      { label: "State", name: "state", field: "state", sortable: true },
+      { label: "Cases", name: "cases", field: "cases", sortable: true },
+      { label: "Active", name: "active", field: "active", sortable: true },
+      { label: "Deaths", name: "deaths", field: "deaths", sortable: true },
+      {
+        label: "Recovered",
+        name: "recovered",
+        field: "recovered",
+        sortable: true,
+      },
+    ];
+    function test() {
+      axios.get("https://disease.sh/v3/covid-19/gov/India").then((res) => {
         // console.log(res.data)
-        result.value = res.data
+        result.value = res.data;
         // console.log(result)
-      })
+      });
     }
-    return { test, result, stateHeaders, search }
-  }
-})
+    return { test, result, stateHeaders, search };
+  },
+});
 </script>
