@@ -1,14 +1,15 @@
 <template>
   <Chart ref="CountryHistorical" :options="options" />
 </template>
-<script lang="js">
+<script>
+import axios from 'axios'
 import { defineComponent, ref, onMounted } from 'vue'
 let self
 export default defineComponent({
   setup () {
     const options = ref({})
     onMounted(() => {
-      self.$axios.get('https://disease.sh/v3/covid-19/historical/India?lastdays=all').then(async (res) => {
+      axios.get('https://disease.sh/v3/covid-19/historical/India?lastdays=all').then(async (res) => {
         const tmp = {
           title: { text: `${res.data.country} COVID Timeseries Data` },
           subtitle: { text: 'Click and drag in the plot area to zoom in' },
