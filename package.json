@@ -7,8 +7,19 @@
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
+  "lint-staged": {
+    "*.{js,vue}": "eslint",
+    "*.{css,vue}": "stylelint"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
   "dependencies": {
+    "@quasar/extras": "^1.0.0",
     "core-js": "^3.6.5",
+    "quasar": "^2.0.0-beta.1",
     "vue": "^3.0.0"
   },
   "devDependencies": {
@@ -18,8 +29,13 @@
     "@vue/compiler-sfc": "^3.0.0",
     "babel-eslint": "^10.1.0",
     "eslint": "^6.7.2",
-    "eslint-plugin-vue": "^7.0.0"
-  },  
+    "eslint-plugin-vue": "^7.0.0",
+    "husky": "^6.0.0",
+    "lint-staged": "^10.5.4",
+    "sass": "^1.29.0",
+    "sass-loader": "^10.1.0",
+    "vue-cli-plugin-quasar": "^4.0.0-beta.1"
+  },
   "browserslist": [
     "> 1%",
     "last 2 versions",
