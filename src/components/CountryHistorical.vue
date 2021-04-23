@@ -1,60 +1,64 @@
 <template>
-  <Chart ref="CountryHistorical" :options="options" />
+  <div class="chart-container">
+    <canvas id="CountryHistorical"></canvas>
+  </div>
 </template>
 <script>
-import axios from 'axios'
-import { defineComponent, ref, onMounted } from 'vue'
-let self
+import Chart from "chart.js/auto";
+import axios from "axios";
+import { defineComponent, onMounted } from "vue";
 export default defineComponent({
-  setup () {
-    const options = ref({})
+  setup() {
     onMounted(() => {
-      axios.get('https://disease.sh/v3/covid-19/historical/India?lastdays=all').then(async (res) => {
-        const tmp = {
-          title: { text: `${res.data.country} COVID Timeseries Data` },
-          subtitle: { text: 'Click and drag in the plot area to zoom in' },
-          xAxis: {
-            type: 'datetime'
-          },
-          yAxis: [
-            { title: { text: 'Confirmed' } }
-            // { title: { text: 'Recovered' } },
-            // { title: { text: 'Deaths' } }
-          ],
-          legend: {
-            layout: 'vertical',
-            align: 'right',
-            verticalAlign: 'middle'
-          },
-          series: [{
-            name: 'Cases',
-            data: await jsonSeriesToArray(res.data.timeline.cases)
-          }, {
-            name: 'Recovered',
-            data: await jsonSeriesToArray(res.data.timeline.recovered)
-          }, {
-            name: 'Deaths',
-            data: await jsonSeriesToArray(res.data.timeline.deaths)
-          }]
-        }
-          console.log(tmp)
-          self.options = tmp
-          console.log(self.$refs.CountryHistorical.render())
-      })
-    })
-    function jsonSeriesToArray (object) {
-      const result = []
-      for (const i in object) {
-        const dt = i.split('/')
-        result.push([Date.UTC('20' + dt[2], dt[0], dt[1]), object[i]])
-      }
-      console.log(result)
-      return result
-    }
-    return { options }
+      axios
+        .get("https://disease.sh/v3/covid-19/historical/India?lastdays=all")
+        .then(async (res) => {
+          const config = {
+            type: "line",
+            data: {
+              labels: Object.keys(res.data.timeline.cases),
+              datasets: [
+                {
+                  label: "Confirmed",
+                  backgroundColor: "blue",
+                  data: Object.values(res.data.timeline.cases),
+                },
+                {
+                  label: "Recovered",
+                  backgroundColor: "green",
+                  data: Object.values(res.data.timeline.recovered),
+                },
+                {
+                  label: "Deaths",
+                  backgroundColor: "red",
+                  data: Object.values(res.data.timeline.deaths),
+                },
+              ],
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              scales: {
+                yAxes: [
+                  {
+                    ticks: {
+                      beginAtZero: true,
+                    },
+                  },
+                ],
+              },
+            },
+          };
+          new Chart(document.getElementById("CountryHistorical"), config);
+        });
+    });
+    return {};
   },
-  created () {
-    self = this
-  }
-})
+});
 </script>
+<style scoped>
+.chart-container {
+    width: 96vw;
+    height:600px
+}
+</style>
