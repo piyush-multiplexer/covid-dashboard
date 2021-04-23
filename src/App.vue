@@ -2,6 +2,7 @@
   <q-layout view="lHh Lpr lFf">
     <q-page-container>
       <country-historical />
+      <world-vaccine-coverage />
       <multi-line-chart />
       <q-card flat bordered class="my-card">
         <q-card-section>
@@ -17,9 +18,16 @@
             row-key="name"
           >
             <template v-slot:top-right>
-              <q-btn class="q-mr-md" @click="test" label="Get Data" color="primary" />
-              <q-input class="q-ml-md"
-                dense outlined
+              <q-btn
+                class="q-mr-md"
+                @click="test"
+                label="Get Data"
+                color="primary"
+              />
+              <q-input
+                class="q-ml-md"
+                dense
+                outlined
                 v-model="search"
                 placeholder="Search by state"
               >
@@ -39,14 +47,14 @@
 import axios from "axios";
 import { defineComponent, ref } from "vue";
 import CountryHistorical from "@/components/CountryHistorical.vue";
-import MultiLineChart from "@/components/MultiLineChart.vue";
+import WorldVaccineCoverage from "./components/WorldVaccineCoverage.vue";
 export default defineComponent({
-  components: { MultiLineChart, CountryHistorical },
+  components: { CountryHistorical, WorldVaccineCoverage },
   setup() {
-    const result = ref({states:[]});
+    const result = ref({ states: [] });
     const search = ref("");
     const stateHeaders = [
-      { label: "State", name: "state", field: "state" , sortable: true },
+      { label: "State", name: "state", field: "state", sortable: true },
       { label: "Cases", name: "cases", field: "cases", sortable: true },
       { label: "Active", name: "active", field: "active", sortable: true },
       { label: "Deaths", name: "deaths", field: "deaths", sortable: true },
