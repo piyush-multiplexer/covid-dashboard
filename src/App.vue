@@ -46,7 +46,7 @@ export default defineComponent({
     const result = ref({states:[]});
     const search = ref("");
     const stateHeaders = [
-      { label: "State", name: "state", field: "state", sortable: true },
+      { label: "State", name: "state", field: "state" , sortable: true },
       { label: "Cases", name: "cases", field: "cases", sortable: true },
       { label: "Active", name: "active", field: "active", sortable: true },
       { label: "Deaths", name: "deaths", field: "deaths", sortable: true },
