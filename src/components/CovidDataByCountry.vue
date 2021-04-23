@@ -1,19 +1,14 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
-    <q-page-container>
-      <country-historical />
-      <world-vaccine-coverage />
-      <covid-data-by-country />
-      <q-card flat bordered class="my-card">
+    <q-card flat bordered class="my-card">
         <q-card-section>
-          <div class="text-h6">COVID Overall Data (India)</div>
+          <div class="text-h6">COVID Overall Data By Country</div>
         </q-card-section>
         <q-separator inset />
         <q-card-section>
           <q-table
-            title="States"
-            :rows="result.states"
-            :columns="stateHeaders"
+            title="Countries"
+            :rows="countries"
+            :columns="countryHeaders"
             :filter="search"
             row-key="name"
           >
@@ -29,7 +24,7 @@
                 dense
                 outlined
                 v-model="search"
-                placeholder="Search by state"
+                placeholder="Search by country"
               >
                 <template v-slot:append>
                   <q-icon name="search" />
@@ -39,23 +34,17 @@
           </q-table>
         </q-card-section>
       </q-card>
-    </q-page-container>
-  </q-layout>
 </template>
 
 <script>
 import axios from "axios";
 import { defineComponent, ref } from "vue";
-import CountryHistorical from "@/components/CountryHistorical.vue";
-import WorldVaccineCoverage from "./components/WorldVaccineCoverage.vue";
-import CovidDataByCountry from "./components/CovidDataByCountry.vue";
 export default defineComponent({
-  components: { CountryHistorical, WorldVaccineCoverage, CovidDataByCountry },
   setup() {
-    const result = ref({ states: [] });
+    const countries = ref([]);
     const search = ref("");
-    const stateHeaders = [
-      { label: "State", name: "state", field: "state", sortable: true },
+    const countryHeaders = [
+      { label: "Country", name: "country", field: "country", sortable: true },
       { label: "Cases", name: "cases", field: "cases", sortable: true },
       { label: "Active", name: "active", field: "active", sortable: true },
       { label: "Deaths", name: "deaths", field: "deaths", sortable: true },
@@ -67,13 +56,11 @@ export default defineComponent({
       },
     ];
     function test() {
-      axios.get("https://disease.sh/v3/covid-19/gov/India").then((res) => {
-        // console.log(res.data)
-        result.value = res.data;
-        // console.log(result)
+      axios.get("https://disease.sh/v3/covid-19/countries?yesterday=false&twoDaysAgo=false&allowNull=true").then((res) => {
+        countries.value = res.data;
       });
     }
-    return { test, result, stateHeaders, search };
+    return { test, countries, countryHeaders, search };
   },
 });
 </script>
