@@ -19,9 +19,11 @@
   "dependencies": {
     "@quasar/extras": "^1.0.0",
     "axios": "^0.21.1",
+    "chart.js": "^3.1.1",
     "core-js": "^3.11.0",
     "quasar": "^2.0.0-beta.1",
-    "vue": "^3.0.0"
+    "vue": "^3.0.0",
+    "vue-chartjs": "^3.5.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
