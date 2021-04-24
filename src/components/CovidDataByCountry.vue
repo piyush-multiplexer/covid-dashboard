@@ -1,21 +1,25 @@
 <template>
-    <q-card flat bordered class="my-card">
+  <q-card flat bordered class="my-card">
+    <q-card-section class="row">
+      <q-card flat bordered class="col-6">
         <q-card-section>
           <div class="text-h6">COVID Overall Data By Country</div>
         </q-card-section>
         <q-separator inset />
         <q-card-section>
           <q-table
+            class="my-sticky-header-table"
             title="Countries"
+            @row-click="onClickCountry(evt, row, index)"
             :rows="countries"
             :columns="countryHeaders"
-            :filter="search"
+            :filter="searchCountry"
             row-key="name"
           >
             <template v-slot:top-right>
               <q-btn
                 class="q-mr-md"
-                @click="test"
+                @click="getWorldData"
                 label="Get Data"
                 color="primary"
               />
@@ -23,7 +27,7 @@
                 class="q-ml-md"
                 dense
                 outlined
-                v-model="search"
+                v-model="searchCountry"
                 placeholder="Search by country"
               >
                 <template v-slot:append>
@@ -34,17 +38,63 @@
           </q-table>
         </q-card-section>
       </q-card>
+      <q-card flat bordered class="col-6">
+        <q-card-section>
+          <div class="text-h6">COVID Overall Data (India)</div>
+        </q-card-section>
+        <q-separator inset />
+        <q-card-section>
+          <q-table
+            class="my-sticky-header-table"
+            title="States"
+            :rows="result.states"
+            :columns="stateHeaders"
+            :filter="searchState"
+            row-key="name"
+          >
+            <template v-slot:top-right>
+              <q-btn
+                class="q-mr-md"
+                @click="getDataByCountry"
+                label="Get Data"
+                color="primary"
+              />
+              <q-input
+                class="q-ml-md"
+                dense
+                outlined
+                v-model="searchState"
+                placeholder="Search by state"
+              >
+                <template v-slot:append>
+                  <q-icon name="search" />
+                </template>
+              </q-input>
+            </template>
+          </q-table>
+        </q-card-section>
+      </q-card>
+    </q-card-section>
+  </q-card>
 </template>
 
 <script>
 import axios from "axios";
-import { defineComponent, ref } from "vue";
+import { defineComponent, ref, onMounted } from "vue";
 export default defineComponent({
   setup() {
     const countries = ref([]);
-    const search = ref("");
-    const countryHeaders = [
-      { label: "Country", name: "country", field: "country", sortable: true },
+    const searchCountry = ref("");
+    const result = ref({ states: [] });
+    const searchState = ref("");
+    const stateHeaders = [
+      {
+        label: "State",
+        align: "left",
+        name: "state",
+        field: "state",
+        sortable: true,
+      },
       { label: "Cases", name: "cases", field: "cases", sortable: true },
       { label: "Active", name: "active", field: "active", sortable: true },
       { label: "Deaths", name: "deaths", field: "deaths", sortable: true },
@@ -55,12 +105,56 @@ export default defineComponent({
         sortable: true,
       },
     ];
-    function test() {
-      axios.get("https://disease.sh/v3/covid-19/countries?yesterday=false&twoDaysAgo=false&allowNull=true").then((res) => {
-        countries.value = res.data;
+    const countryHeaders = [
+      {
+        label: "Country",
+        align: "left",
+        name: "country",
+        field: "country",
+        sortable: true,
+      },
+      { label: "Cases", name: "cases", field: "cases", sortable: true },
+      { label: "Active", name: "active", field: "active", sortable: true },
+      { label: "Deaths", name: "deaths", field: "deaths", sortable: true },
+      {
+        label: "Recovered",
+        name: "recovered",
+        field: "recovered",
+        sortable: true,
+      },
+    ];
+    onMounted(() => {
+      getWorldData();
+      getDataByCountry();
+    });
+    function getWorldData() {
+      axios.get("https://disease.sh/v3/covid-19/gov/India").then((res) => {
+        result.value = res.data;
       });
     }
-    return { test, countries, countryHeaders, search };
+    function getDataByCountry() {
+      axios
+        .get(
+          "https://disease.sh/v3/covid-19/countries?yesterday=false&twoDaysAgo=false&allowNull=true"
+        )
+        .then((res) => {
+          countries.value = res.data;
+        });
+    }
+    function onClickCountry(evt, row, index) {
+      console.log(evt, row, index);
+    }
+    return {
+      getWorldData,
+      result,
+      stateHeaders,
+      searchCountry,
+      getDataByCountry,
+      countries,
+      countryHeaders,
+      searchState,
+      onClickCountry,
+    };
   },
 });
 </script>
