@@ -84,6 +84,7 @@ import { defineComponent, ref, onMounted } from "vue";
 let self;
 export default defineComponent({
   setup() {
+    let currentCountry = ref('India')
     const countries = ref([]);
     const searchCountry = ref("");
     const result = ref({ states: [] });
@@ -129,7 +130,7 @@ export default defineComponent({
       getDataByCountry();
     });
     function getWorldData() {
-      axios.get("https://disease.sh/v3/covid-19/gov/India").then((res) => {
+      axios.get(`https://disease.sh/v3/covid-19/gov/India`).then((res) => {
         result.value = res.data;
       });
     }
@@ -143,6 +144,8 @@ export default defineComponent({
         });
     }
     function onClickCountry(evt, row) {
+      currentCountry.value = row.country
+      getWorldData();
       self.$emit("country-clicked", row);
     }
     return {
