@@ -4,7 +4,7 @@
       <country-historical />
       <world-vaccine-coverage />
       <covid-data-by-country @country-clicked="viewCountryData" />
-      <country-covid-data :country-data="countryData" />
+      <country-covid-data v-if="countryData" :country-data="countryData" />
     </q-page-container>
   </q-layout>
 </template>
