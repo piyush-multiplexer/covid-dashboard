@@ -3,18 +3,31 @@
     <q-page-container>
       <country-historical />
       <world-vaccine-coverage />
-      <covid-data-by-country />
+      <covid-data-by-country @country-clicked="viewCountryData" />
+      <country-covid-data :country-data="countryData" />
     </q-page-container>
   </q-layout>
 </template>
 
 <script>
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
 import CountryHistorical from "@/components/CountryHistorical.vue";
 import WorldVaccineCoverage from "./components/WorldVaccineCoverage.vue";
 import CovidDataByCountry from "./components/CovidDataByCountry.vue";
+import CountryCovidData from "./components/CountryCovidData.vue";
 export default defineComponent({
-  components: { CountryHistorical, WorldVaccineCoverage, CovidDataByCountry },
-  setup() {},
+  components: {
+    CountryHistorical,
+    WorldVaccineCoverage,
+    CovidDataByCountry,
+    CountryCovidData,
+  },
+  setup() {
+    let countryData = ref(null);
+    function viewCountryData(param) {
+      countryData.value = param;
+    }
+    return { viewCountryData, countryData };
+  },
 });
 </script>

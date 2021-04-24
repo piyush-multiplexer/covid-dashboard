@@ -10,7 +10,7 @@
           <q-table
             class="my-sticky-header-table"
             title="Countries"
-            @row-click="onClickCountry(evt, row, index)"
+            @row-click="onClickCountry"
             :rows="countries"
             :columns="countryHeaders"
             :filter="searchCountry"
@@ -81,6 +81,7 @@
 <script>
 import axios from "axios";
 import { defineComponent, ref, onMounted } from "vue";
+let self;
 export default defineComponent({
   setup() {
     const countries = ref([]);
@@ -141,8 +142,8 @@ export default defineComponent({
           countries.value = res.data;
         });
     }
-    function onClickCountry(evt, row, index) {
-      console.log(evt, row, index);
+    function onClickCountry(evt, row) {
+      self.$emit("country-clicked", row);
     }
     return {
       getWorldData,
@@ -155,6 +156,9 @@ export default defineComponent({
       searchState,
       onClickCountry,
     };
+  },
+  created() {
+    self = this;
   },
 });
 </script>

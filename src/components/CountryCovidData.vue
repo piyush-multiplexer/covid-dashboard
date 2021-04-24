@@ -1,12 +1,14 @@
 <template>
-  <Chart ref="lineCharts" :options="options" />
+<div></div>
 </template>
 <script lang="js">
 import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
-  setup () {
+  props:['countryData'],
+  setup (_props) {    
     let options = ref({})
+    console.log('props',_props.countryData);  
     return { options }
   }
 })
