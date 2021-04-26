@@ -20,17 +20,17 @@ export default defineComponent({
               datasets: [
                 {
                   label: "Confirmed",
-                  backgroundColor: "blue",
+                  backgroundColor: "#2f4b7c",
                   data: Object.values(res.data.cases),
                 },
                 {
                   label: "Recovered",
-                  backgroundColor: "green",
+                  backgroundColor: "#00e7f2",
                   data: Object.values(res.data.recovered),
                 },
                 {
                   label: "Deaths",
-                  backgroundColor: "red",
+                  backgroundColor: "#f95d6a",
                   data: Object.values(res.data.deaths),
                 },
               ],

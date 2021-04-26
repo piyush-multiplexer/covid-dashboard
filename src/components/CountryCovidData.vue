@@ -28,7 +28,7 @@ export default defineComponent({
           datasets: [
             {
               label: "Dataset One",
-              backgroundColor: ["blue", "green", "orange", "red"],
+              backgroundColor: ["#2f4b7c", "#00e7f2", "#ff7c43", "#f95d6a"],
               data: [
                 covidData.cases,
                 covidData.recovered,

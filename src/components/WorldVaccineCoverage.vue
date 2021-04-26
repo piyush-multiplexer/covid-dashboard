@@ -20,7 +20,7 @@ export default defineComponent({
               datasets: [
                 {
                   label: "Vaccinated",
-                  backgroundColor: "yellow",
+                  backgroundColor: "#00b8d3",
                   data: Object.values(res.data),
                 }
               ],
