@@ -16,6 +16,7 @@ import { defineComponent, ref, reactive, watchEffect } from "vue";
 export default defineComponent({
   props: ["countryData"],
   setup(_props) {
+    let chart;
     let options = ref({});
     let covidData = reactive(_props.countryData);
     watchEffect(() => {
@@ -45,14 +46,25 @@ export default defineComponent({
             legend: { position: "top" },
             title: {
               display: true,
-              text: `(${covidData.country}) COIVD Data with Population (${covidData.population}) Distribution`,
+              text: `(${covidData.country}) COVID Data with Population (${covidData.population}) Distribution`,
               font: { weight: 700, size: 18 },
             },
           },
         },
       };
       setTimeout(() => {
-        new Chart(document.getElementById("CountryCovidData-Pie"), config);
+        try {
+          console.log('try')
+          chart = new Chart(
+            document.getElementById("CountryCovidData-Pie"),
+            config
+          );
+        } catch {
+          console.log('catch')
+          chart.data.datasets[0].data = config.data.datasets[0].data;
+          chart.options.plugins.title.text = config.options.plugins.title.text;
+          chart.update();
+        }
       }, 500);
     });
     return { options, covidData };
