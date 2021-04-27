@@ -25,15 +25,15 @@ export default defineComponent({
       const config = {
         type: "pie",
         data: {
-          labels: ["Confirmed", "Recovered", "Critical", "Deaths"],
+          labels: ["Confirmed", "Critical", "Recovered", "Deaths"],
           datasets: [
             {
               label: "Dataset One",
-              backgroundColor: ["#2f4b7c", "#00e7f2", "#ff7c43", "#f95d6a"],
+              backgroundColor: ["#2f4b7c", "#ff7c43", "#00e7f2", "#f95d6a"],
               data: [
                 covidData.cases,
-                covidData.recovered,
                 covidData.critical,
+                covidData.recovered,
                 covidData.deaths,
               ],
             },
@@ -50,17 +50,24 @@ export default defineComponent({
               font: { weight: 700, size: 18 },
             },
           },
+          tooltips: {
+            callbacks: {
+              label: function (tooltipItem) {
+                return tooltipItem.yLabel.toLocaleString("en-IN");
+              },
+            },
+          },
         },
       };
       setTimeout(() => {
         try {
-          console.log('try')
+          console.log("try");
           chart = new Chart(
             document.getElementById("CountryCovidData-Pie"),
             config
           );
         } catch {
-          console.log('catch')
+          console.log("catch");
           chart.data.datasets[0].data = config.data.datasets[0].data;
           chart.options.plugins.title.text = config.options.plugins.title.text;
           chart.update();

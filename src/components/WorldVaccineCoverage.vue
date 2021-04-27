@@ -22,7 +22,7 @@ export default defineComponent({
                   label: "Vaccinated",
                   backgroundColor: "#00b8d3",
                   data: Object.values(res.data),
-                }
+                },
               ],
             },
             options: {
@@ -49,6 +49,13 @@ export default defineComponent({
                     },
                   },
                 ],
+              },
+              tooltips: {
+                callbacks: {
+                  label: function (tooltipItem) {
+                    return tooltipItem.yLabel.toLocaleString("en-IN");
+                  },
+                },
               },
             },
           };
