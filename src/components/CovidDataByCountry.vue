@@ -84,7 +84,7 @@ import { defineComponent, ref, onMounted } from "vue";
 let self;
 export default defineComponent({
   setup() {
-    let currentCountry = ref('India')
+    let currentCountry = ref("India");
     const countries = ref([]);
     const searchCountry = ref("");
     const result = ref({ states: [] });
@@ -97,14 +97,33 @@ export default defineComponent({
         field: "state",
         sortable: true,
       },
-      { label: "Cases", name: "cases", field: "cases", sortable: true },
-      { label: "Active", name: "active", field: "active", sortable: true },
-      { label: "Deaths", name: "deaths", field: "deaths", sortable: true },
+      {
+        label: "Cases",
+        name: "cases",
+        field: "cases",
+        sortable: true,
+        format: (val) => val.toLocaleString("en-IN"),
+      },
+      {
+        label: "Active",
+        name: "active",
+        field: "active",
+        sortable: true,
+        format: (val) => val.toLocaleString("en-IN"),
+      },
+      {
+        label: "Deaths",
+        name: "deaths",
+        field: "deaths",
+        sortable: true,
+        format: (val) => val.toLocaleString("en-IN"),
+      },
       {
         label: "Recovered",
         name: "recovered",
         field: "recovered",
         sortable: true,
+        format: (val) => val.toLocaleString("en-IN"),
       },
     ];
     const countryHeaders = [
@@ -115,14 +134,33 @@ export default defineComponent({
         field: "country",
         sortable: true,
       },
-      { label: "Cases", name: "cases", field: "cases", sortable: true },
-      { label: "Active", name: "active", field: "active", sortable: true },
-      { label: "Deaths", name: "deaths", field: "deaths", sortable: true },
+      {
+        label: "Cases",
+        name: "cases",
+        field: "cases",
+        sortable: true,
+        format: (val) => val.toLocaleString("en-IN"),
+      },
+      {
+        label: "Active",
+        name: "active",
+        field: "active",
+        sortable: true,
+        format: (val) => val.toLocaleString("en-IN"),
+      },
+      {
+        label: "Deaths",
+        name: "deaths",
+        field: "deaths",
+        sortable: true,
+        format: (val) => val.toLocaleString("en-IN"),
+      },
       {
         label: "Recovered",
         name: "recovered",
         field: "recovered",
         sortable: true,
+        format: (val) => val.toLocaleString("en-IN"),
       },
     ];
     onMounted(() => {
@@ -144,7 +182,7 @@ export default defineComponent({
         });
     }
     function onClickCountry(evt, row) {
-      currentCountry.value = row.country
+      currentCountry.value = row.country;
       getWorldData();
       self.$emit("country-clicked", row);
     }
