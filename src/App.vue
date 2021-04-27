@@ -1,6 +1,6 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-page-container>
+    <q-page-container class="q-pa-sm q-pb-md">
       <country-historical />
       <world-vaccine-coverage />
       <covid-data-by-country @country-clicked="viewCountryData" />
