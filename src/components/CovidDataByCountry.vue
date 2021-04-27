@@ -9,7 +9,7 @@
         <q-card-section>
           <q-table
             class="my-sticky-header-table"
-            title="Countries"
+            title="Countries (click for detail)"
             @row-click="onClickCountry"
             :rows="countries"
             :columns="countryHeaders"
@@ -179,11 +179,15 @@ export default defineComponent({
         )
         .then((res) => {
           countries.value = res.data;
+          self.$emit(
+            "country-clicked",
+            res.data.find((c) => c.country === "India")
+          );
         });
     }
     function onClickCountry(evt, row) {
       currentCountry.value = row.country;
-      getWorldData();
+      // getWorldData();
       self.$emit("country-clicked", row);
     }
     return {
