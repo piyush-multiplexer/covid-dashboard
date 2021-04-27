@@ -53,7 +53,7 @@ export default defineComponent({
               tooltips: {
                 callbacks: {
                   label: function (tooltipItem) {
-                    return tooltipItem.yLabel.toLocaleString("en-IN");
+                    return tooltipItem.yLabel?.toLocaleString("en-IN");
                   },
                 },
               },

@@ -40,7 +40,7 @@ export default defineComponent({
               plugins: {
                 title: {
                   display: true,
-                  text: `${covidData.country} Country COVID Vaccination Coverage Data`,
+                  text: `(${covidData.country}) COVID Vaccination Coverage Data`,
                   position: "top",
                   align: "center",
                   font: { weight: 700, size: 18 },
@@ -64,7 +64,7 @@ export default defineComponent({
               tooltips: {
                 callbacks: {
                   label: function (tooltipItem) {
-                    return tooltipItem.yLabel.toLocaleString("en-IN");
+                    return tooltipItem.yLabel?.toLocaleString("en-IN");
                   },
                 },
               },
@@ -94,14 +94,14 @@ export default defineComponent({
                 legend: { position: "top" },
                 title: {
                   display: true,
-                  text: `(${covidData.country}) COVID Data with Population (${covidData.population.toLocaleString("en-IN")}) Distribution`,
+                  text: `(${covidData.country}) COVID Data with Population (${covidData.population?.toLocaleString("en-IN")}) Distribution`,
                   font: { weight: 700, size: 18 },
                 },
               },
               tooltips: {
                 callbacks: {
                   label: function (tooltipItem) {
-                    return tooltipItem.yLabel.toLocaleString("en-IN");
+                    return tooltipItem.yLabel?.toLocaleString("en-IN");
                   },
                 },
               },
