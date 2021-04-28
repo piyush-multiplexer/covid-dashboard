@@ -57,6 +57,11 @@ export default defineComponent({
                   title: {
                     display: true,
                     text: "Date ",
+                    color: "#011",
+                    font: {
+                      size: 16,
+                      weight: "bold",
+                    },
                   },
                 },
                 y: {
@@ -64,6 +69,11 @@ export default defineComponent({
                   title: {
                     display: true,
                     text: "Counts",
+                    color: "#011",
+                    font: {
+                      size: 16,
+                      weight: "bold",
+                    },
                   },
                 },
               },
