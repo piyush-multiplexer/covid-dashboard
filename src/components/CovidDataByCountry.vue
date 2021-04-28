@@ -45,7 +45,7 @@
         <q-separator inset />
         <q-card-section>
           <q-table
-            class="my-sticky-header-table"
+            class="my-sticky-column-table"
             title="States"
             :rows="result.states"
             :columns="stateHeaders"
@@ -207,3 +207,43 @@ export default defineComponent({
   },
 });
 </script>
+<style lang="sass">
+.my-sticky-header-table
+  /* height or max-height is important */
+  height: 402px
+
+  .q-table__top,
+  .q-table__bottom,
+  tr:first-child th 
+    /* bg color is important for th; just specify one */
+    background-color: #e5e5e5
+
+  thead tr th
+    position: sticky
+    z-index: 1
+  thead tr:first-child th
+    top: 0
+
+  /* this is when the loading indicator appears */
+  &.q-table--loading thead tr:last-child th
+    /* height of all previous header rows */
+    top: 48px
+
+.my-sticky-column-table
+  /* specifying max-width so the example can
+   highlight the sticky column on any browser window */
+  // max-width: 600px
+
+  thead tr:first-child th:first-child
+    /* bg color is important for th; just specify one */
+    background-color: #e5e5e5
+
+  td:first-child
+    background-color: #e5e5e5
+
+  th:first-child,
+  td:first-child
+    position: sticky
+    left: 0
+    z-index: 1
+</style>
