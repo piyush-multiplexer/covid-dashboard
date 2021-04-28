@@ -60,6 +60,10 @@ export default defineComponent({
                   },
                 ],
               },
+              interaction: {
+                mode: "index",
+                intersect: false,
+              },
               tooltips: {
                 callbacks: {
                   label: function (tooltipItem) {
