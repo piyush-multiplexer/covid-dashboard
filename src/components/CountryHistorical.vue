@@ -52,13 +52,20 @@ export default defineComponent({
               responsive: true,
               maintainAspectRatio: false,
               scales: {
-                yAxes: [
-                  {
-                    ticks: {
-                      beginAtZero: true,
-                    },
+                x: {
+                  display: true,
+                  title: {
+                    display: true,
+                    text: "Date ",
                   },
-                ],
+                },
+                y: {
+                  display: true,
+                  title: {
+                    display: true,
+                    text: "Counts",
+                  },
+                },
               },
               interaction: {
                 mode: "index",
