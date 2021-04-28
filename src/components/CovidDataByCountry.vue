@@ -127,6 +127,34 @@ export default defineComponent({
         sortable: true,
         format: (val) => val?.toLocaleString("en-IN"),
       },
+      {
+        label: "Today Cases",
+        name: "todayCases",
+        field: "todayCases",
+        sortable: true,
+        format: (val) => val?.toLocaleString("en-IN"),
+      },
+      {
+        label: "Today Active",
+        name: "todayActive",
+        field: "todayActive",
+        sortable: true,
+        format: (val) => val?.toLocaleString("en-IN"),
+      },
+      {
+        label: "Today Deaths",
+        name: "todayDeaths",
+        field: "todayDeaths",
+        sortable: true,
+        format: (val) => val?.toLocaleString("en-IN"),
+      },
+      {
+        label: "Today Recovered",
+        name: "todayRecovered",
+        field: "todayRecovered",
+        sortable: true,
+        format: (val) => val?.toLocaleString("en-IN"),
+      },
     ];
     const countryHeaders = [
       {
@@ -217,7 +245,7 @@ export default defineComponent({
 
   .q-table__top,
   .q-table__bottom,
-  tr:first-child th 
+  tr:first-child th
     /* bg color is important for th; just specify one */
     background-color: #e5e5e5
 
