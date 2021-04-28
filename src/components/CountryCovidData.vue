@@ -94,7 +94,11 @@ export default defineComponent({
                 legend: { position: "top" },
                 title: {
                   display: true,
-                  text: `(${covidData.country}) COVID Data with Population (${covidData.population?.toLocaleString("en-IN")}) Distribution`,
+                  text: `(${
+                    covidData.country
+                  }) COVID Data with Population (${covidData.population?.toLocaleString(
+                    "en-IN"
+                  )}) Distribution`,
                   font: { weight: 700, size: 18 },
                 },
               },
