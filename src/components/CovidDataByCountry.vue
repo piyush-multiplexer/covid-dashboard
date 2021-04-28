@@ -15,6 +15,7 @@
             :columns="countryHeaders"
             :filter="searchCountry"
             row-key="name"
+            separator="horizontal"
           >
             <template v-slot:top-right>
               <q-btn
@@ -51,11 +52,12 @@
             :columns="stateHeaders"
             :filter="searchState"
             row-key="name"
+            separator="vertical"
           >
             <template v-slot:top-right>
               <q-btn
                 class="q-mr-md"
-                @click="getDataByCountry"
+                @click="getCountryData"
                 label="Get Data"
                 color="primary"
               />
@@ -164,15 +166,10 @@ export default defineComponent({
       },
     ];
     onMounted(() => {
+      getCountryData();
       getWorldData();
-      getDataByCountry();
     });
     function getWorldData() {
-      axios.get(`https://disease.sh/v3/covid-19/gov/India`).then((res) => {
-        result.value = res.data;
-      });
-    }
-    function getDataByCountry() {
       axios
         .get(
           "https://disease.sh/v3/covid-19/countries?yesterday=false&twoDaysAgo=false&allowNull=true"
@@ -185,17 +182,22 @@ export default defineComponent({
           );
         });
     }
+    function getCountryData() {
+      axios.get(`https://disease.sh/v3/covid-19/gov/India`).then((res) => {
+        result.value = res.data;
+      });
+    }
     function onClickCountry(evt, row) {
       currentCountry.value = row.country;
-      // getWorldData();
+      // getCountryData();
       self.$emit("country-clicked", row);
     }
     return {
-      getWorldData,
+      getCountryData,
       result,
       stateHeaders,
       searchCountry,
-      getDataByCountry,
+      getWorldData,
       countries,
       countryHeaders,
       searchState,
@@ -207,6 +209,7 @@ export default defineComponent({
   },
 });
 </script>
+
 <style lang="sass">
 .my-sticky-header-table
   /* height or max-height is important */
