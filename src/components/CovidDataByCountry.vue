@@ -9,21 +9,17 @@
         <q-card-section>
           <q-table
             class="my-sticky-header-table"
-            title="Countries (click for detail)"
+            :title="`Countries (${countries.length})`"
             @row-click="onClickCountry"
             :rows="countries"
             :columns="countryHeaders"
             :filter="searchCountry"
             row-key="name"
             separator="horizontal"
+            :pagination="pagination"
           >
             <template v-slot:top-right>
-              <q-btn
-                class="q-mr-md"
-                @click="getWorldData"
-                label="Get Data"
-                color="primary"
-              />
+              <span>click country for detail below</span>
               <q-input
                 class="q-ml-md"
                 dense
@@ -47,12 +43,13 @@
         <q-card-section>
           <q-table
             class="my-sticky-column-table"
-            title="States"
+            :title="`States (${result.states.length})`"
             :rows="result.states"
             :columns="stateHeaders"
             :filter="searchState"
             row-key="name"
             separator="vertical"
+            :pagination="pagination"
           >
             <template v-slot:top-right>
               <q-btn
@@ -91,6 +88,7 @@ export default defineComponent({
     const searchCountry = ref("");
     const result = ref({ states: [] });
     const searchState = ref("");
+    const pagination  = {rowsPerPage:10}
     const stateHeaders = [
       {
         label: "State",
@@ -230,6 +228,7 @@ export default defineComponent({
       countryHeaders,
       searchState,
       onClickCountry,
+      pagination
     };
   },
   created() {
@@ -241,7 +240,7 @@ export default defineComponent({
 <style lang="sass">
 .my-sticky-header-table
   /* height or max-height is important */
-  height: 402px
+  height: 450px
 
   .q-table__top,
   .q-table__bottom,
@@ -264,6 +263,7 @@ export default defineComponent({
   /* specifying max-width so the example can
    highlight the sticky column on any browser window */
   // max-width: 600px
+  height: 450px
 
   thead tr:first-child th:first-child
     /* bg color is important for th; just specify one */
