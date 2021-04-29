@@ -7,14 +7,27 @@
       <q-separator inset />
       <q-card-section>
         <q-table
-          :title="`Data`"
+          :title="`Data ${pagination.rowsNumber}`"
           :rows="rows"
           :columns="headers"
           row-key="id"
           v-model:pagination="pagination"
+          :filter="filter"
           :loading="loading"
           @request="onRequest"
-        >
+          ><template v-slot:top-right>
+            <q-input
+              outlined
+              dense
+              debounce="300"
+              v-model="filter"
+              placeholder="Search"
+            >
+              <template v-slot:append>
+                <q-icon name="search" />
+              </template>
+            </q-input>
+          </template>
         </q-table>
       </q-card-section>
     </q-card>
@@ -30,6 +43,7 @@ export default defineComponent({
   setup() {
     const loading = ref(false);
     const rows = ref([]);
+    const filter = ref("");
     const pagination = ref({
       page: 1,
       rowsPerPage: 10,
@@ -62,19 +76,20 @@ export default defineComponent({
     ];
 
     async function onRequest(props) {
-      const { page, rowsPerPage } = props.pagination;
       loading.value = true;
+      const { page, rowsPerPage } = props.pagination;
+      const filter = props.filter;
       const count =
         rowsPerPage === 0 ? pagination.value.rowsNumber : rowsPerPage;
-      rows.value = await getData(page, count);
+      rows.value = await getData(page, count, filter);
       pagination.value.page = page;
       pagination.value.rowsPerPage = rowsPerPage;
       loading.value = false;
     }
-    async function getData(page, count) {
+    async function getData(page, count, filter) {
       return axios
         .get(
-          `https://608919b0a6f4a300174279a0.mockapi.io/users?p=${page}&l=${count}`
+          `https://608919b0a6f4a300174279a0.mockapi.io/users?search=${filter}&p=${page}&l=${count}`
         )
         .then((res) => {
           return res.data;
@@ -83,9 +98,10 @@ export default defineComponent({
     onMounted(() => {
       onRequest({
         pagination: pagination.value,
+        filter: "",
       });
     });
-    return { headers, loading, pagination, rows, onRequest };
+    return { headers, loading, pagination, rows, onRequest, filter };
   },
 });
 </script>
