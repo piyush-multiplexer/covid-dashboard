@@ -7,7 +7,7 @@
       <q-separator inset />
       <q-card-section>
         <q-table
-          :title="`Data (${rows.length})`"
+          :title="`Data`"
           :rows="rows"
           :columns="headers"
           row-key="id"
@@ -25,12 +25,12 @@
 // fifixo1471@sumwan.com
 
 import axios from "axios";
-import { defineComponent, ref, onMounted, reactive } from "vue";
+import { defineComponent, ref, onMounted } from "vue";
 export default defineComponent({
   setup() {
     const loading = ref(false);
-    let rows = reactive([]);
-    const pagination = reactive({
+    const rows = ref([]);
+    const pagination = ref({
       page: 1,
       rowsPerPage: 10,
       rowsNumber: 100,
@@ -60,40 +60,31 @@ export default defineComponent({
         field: "createdAt",
       },
     ];
-    onMounted(() => {
-      onRequest({
-        pagination: pagination,
-      });
-    });
+
     async function onRequest(props) {
       const { page, rowsPerPage } = props.pagination;
       loading.value = true;
-      // get all rows if "All" (0) is selected
-      const fetchCount =
-        rowsPerPage === 0 ? pagination.rowsNumber : rowsPerPage;
-      // calculate starting row of data
-      const startRow = (page - 1) * rowsPerPage;
-      // fetch data from "server" clear out existing data and add new
-      rows = await getData(startRow, fetchCount);
-      // don't forget to update local pagination object
-      pagination.page = page;
-      pagination.rowsPerPage = rowsPerPage;
-      console.log(rows);
-      console.log(pagination);
-      // ...and turn of loading indicator
+      const count =
+        rowsPerPage === 0 ? pagination.value.rowsNumber : rowsPerPage;
+      rows.value = await getData(page, count);
+      pagination.value.page = page;
+      pagination.value.rowsPerPage = rowsPerPage;
       loading.value = false;
     }
-    async function getData(startRow, count) {
+    async function getData(page, count) {
       return axios
         .get(
-          `https://608919b0a6f4a300174279a0.mockapi.io/users?p=${
-            startRow + 1
-          }&l=${count}`
+          `https://608919b0a6f4a300174279a0.mockapi.io/users?p=${page}&l=${count}`
         )
         .then((res) => {
           return res.data;
         });
     }
+    onMounted(() => {
+      onRequest({
+        pagination: pagination.value,
+      });
+    });
     return { headers, loading, pagination, rows, onRequest };
   },
 });
