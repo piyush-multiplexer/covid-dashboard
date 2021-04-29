@@ -15,6 +15,7 @@
           :filter="filter"
           :loading="loading"
           @request="onRequest"
+          binary-state-sort
           ><template v-slot:top-right>
             <q-input
               outlined
@@ -97,7 +98,9 @@ export default defineComponent({
     async function getData(page, count, filter, sortBy, descending) {
       return axios
         .get(
-          `https://608919b0a6f4a300174279a0.mockapi.io/users?search=${filter}&sortBy=${sortBy}&order=${descending ? "desc" : "asc"}&p=${page}&l=${count}`
+          `https://608919b0a6f4a300174279a0.mockapi.io/users?search=${filter}&sortBy=${sortBy}&order=${
+            descending ? "desc" : "asc"
+          }&p=${page}&l=${count}`
         )
         .then((res) => {
           return res.data;
