@@ -48,6 +48,8 @@ export default defineComponent({
       page: 1,
       rowsPerPage: 10,
       rowsNumber: 100,
+      sortBy: "id",
+      descending: false,
     });
     const headers = [
       {
@@ -55,41 +57,47 @@ export default defineComponent({
         align: "left",
         name: "id",
         field: "id",
+        sortable: true,
       },
       {
         label: "Name",
         align: "left",
         name: "name",
         field: "name",
+        sortable: true,
       },
       {
         label: "Email",
         align: "left",
         name: "email",
         field: "email",
+        sortable: true,
       },
       {
         label: "Created At",
         name: "createdAt",
         field: "createdAt",
+        sortable: true,
       },
     ];
 
     async function onRequest(props) {
       loading.value = true;
-      const { page, rowsPerPage } = props.pagination;
+      const { page, rowsPerPage, sortBy, descending } = props.pagination;
       const filter = props.filter;
       const count =
         rowsPerPage === 0 ? pagination.value.rowsNumber : rowsPerPage;
-      rows.value = await getData(page, count, filter);
+      rows.value = await getData(page, count, filter, sortBy, descending);
       pagination.value.page = page;
       pagination.value.rowsPerPage = rowsPerPage;
+      pagination.value.sortBy = sortBy;
+      pagination.value.descending = descending;
       loading.value = false;
     }
-    async function getData(page, count, filter) {
+    async function getData(page, count, filter, sortBy, descending) {
       return axios
         .get(
-          `https://608919b0a6f4a300174279a0.mockapi.io/users?search=${filter}&p=${page}&l=${count}`
+          `https://608919b0a6f4a300174279a0.mockapi.io/users?search=${filter}&sortBy=${sortBy}&order=${descending ? "desc" : "asc"}&p=${page}&l=${count}`
         )
         .then((res) => {
           return res.data;
