@@ -43,6 +43,7 @@ import { defineComponent, ref, onMounted } from "vue";
 import Constants from "@/constants/Constants";
 export default defineComponent({
   setup() {
+    const totalRowCount = 100;
     const loading = ref(false);
     const rows = ref([]);
     const filter = ref("");
@@ -51,7 +52,7 @@ export default defineComponent({
       rowsPerPage: 5,
       rowsNumber: 0,
       sortBy: "id",
-      descending: false,
+      descending: false
     });
     const headers = [
       {
@@ -59,28 +60,28 @@ export default defineComponent({
         align: "left",
         name: "id",
         field: "id",
-        sortable: true,
+        sortable: true
       },
       {
         label: "Name",
         align: "left",
         name: "name",
         field: "name",
-        sortable: true,
+        sortable: true
       },
       {
         label: "Email",
         align: "left",
         name: "email",
         field: "email",
-        sortable: true,
+        sortable: true
       },
       {
         label: "Created At",
         name: "createdAt",
         field: "createdAt",
-        sortable: true,
-      },
+        sortable: true
+      }
     ];
 
     async function onRequest(props) {
@@ -107,17 +108,25 @@ export default defineComponent({
             descending ? "desc" : "asc"
           }&p=${page}&l=${count}`
         )
-        .then((res) => {
+        .then(res => {
           return res.data;
         });
     }
     onMounted(() => {
       onRequest({
         pagination: pagination.value,
-        filter: "",
+        filter: ""
       });
     });
-    return { headers, loading, pagination, rows, onRequest, filter };
-  },
+    return {
+      headers,
+      loading,
+      pagination,
+      rows,
+      onRequest,
+      filter,
+      totalRowCount
+    };
+  }
 });
 </script>
