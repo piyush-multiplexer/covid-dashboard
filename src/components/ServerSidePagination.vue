@@ -102,7 +102,7 @@ export default defineComponent({
         .get(
           `${
             Constants.API_URL
-          }/redirector/server-table/users?search=${filter}&sortBy=${sortBy}&order=${
+          }redirector/server-table/users?search=${filter}&sortBy=${sortBy}&order=${
             descending ? "desc" : "asc"
           }&p=${page}&l=${count}`
         )
