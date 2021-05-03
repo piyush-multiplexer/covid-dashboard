@@ -37,9 +37,9 @@
 <script>
 // https://608919b0a6f4a300174279a0.mockapi.io/:endpoint
 // fifixo1471@sumwan.com
-
 import axios from "axios";
 import { defineComponent, ref, onMounted } from "vue";
+import Constants from "@/constants/Constants";
 export default defineComponent({
   setup() {
     const loading = ref(false);
@@ -100,7 +100,9 @@ export default defineComponent({
     async function getData(page, count, filter, sortBy, descending) {
       return axios
         .get(
-          `http://localhost:3000/redirector/server-table/users?search=${filter}&sortBy=${sortBy}&order=${
+          `${
+            Constants.API_URL
+          }/redirector/server-table/users?search=${filter}&sortBy=${sortBy}&order=${
             descending ? "desc" : "asc"
           }&p=${page}&l=${count}`
         )
