@@ -15,6 +15,7 @@
           :filter="filter"
           :loading="loading"
           @request="onRequest"
+          :rows-per-page-options="[5, 10, 50, 100, 0]"
           binary-state-sort
           ><template v-slot:top-right>
             <q-input
@@ -47,7 +48,7 @@ export default defineComponent({
     const filter = ref("");
     const pagination = ref({
       page: 1,
-      rowsPerPage: 10,
+      rowsPerPage: 5,
       rowsNumber: 0,
       sortBy: "id",
       descending: false,
