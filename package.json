@@ -17,11 +17,11 @@
     }
   },
   "dependencies": {
-    "@quasar/extras": "^1.10.8",
+    "@quasar/extras": "^1.10.10",
     "axios": "^0.21.1",
     "chart.js": "^3.5.0",
     "core-js": "^3.16.1",
-    "quasar": "^2.0.2",
+    "quasar": "^2.0.3",
     "vue": "^3.1.5",
     "vue-router": "^4.0.10"
   },
@@ -34,7 +34,7 @@
     "eslint": "^7.32.0",
     "eslint-plugin-vue": "^7.13.0",
     "husky": "^7.0.1",
-    "lint-staged": "^11.0.0",
+    "lint-staged": "^11.1.2",
     "sass": "^1.35.2",
     "sass-loader": "^10.1.1",
     "vue-cli-plugin-quasar": "^4.0.1"
