@@ -17,12 +17,12 @@
     }
   },
   "dependencies": {
-    "@quasar/extras": "^1.10.12",
+    "@quasar/extras": "^1.11.0",
     "axios": "^0.21.4",
     "chart.js": "^3.5.1",
     "core-js": "^3.17.2",
     "vue": "^3.2.13",
-    "quasar": "^2.0.4",
+    "quasar": "^2.1.0",
     "vue-router": "^4.0.11"
   },
   "devDependencies": {
@@ -32,7 +32,7 @@
     "@vue/compiler-sfc": "^3.2.10",
     "babel-eslint": "^10.1.0",
     "eslint": "^7.32.0",
-    "eslint-plugin-vue": "^7.17.0",
+    "eslint-plugin-vue": "^7.18.0",
     "husky": "^7.0.2",
     "lint-staged": "^11.1.2",
     "sass": "^1.39.0",
