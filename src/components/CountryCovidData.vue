@@ -23,7 +23,7 @@ export default defineComponent({
         .get(
           `https://disease.sh/v3/covid-19/vaccine/coverage/countries/${covidData.country}?lastdays=100`
         )
-        .then(async (res) => {
+        .then(async res => {
           const lineConfig = {
             type: "line",
             data: {
@@ -32,9 +32,9 @@ export default defineComponent({
                 {
                   label: "Vaccinated",
                   backgroundColor: "#00b8d3",
-                  data: Object.values(res.data.timeline),
-                },
-              ],
+                  data: Object.values(res.data.timeline)
+                }
+              ]
             },
             options: {
               plugins: {
@@ -46,9 +46,9 @@ export default defineComponent({
                   font: { weight: 700, size: 18 },
                   padding: {
                     top: 15,
-                    bottom: 5,
-                  },
-                },
+                    bottom: 5
+                  }
+                }
               },
               responsive: true,
               maintainAspectRatio: false,
@@ -56,19 +56,19 @@ export default defineComponent({
                 yAxes: [
                   {
                     ticks: {
-                      beginAtZero: true,
-                    },
-                  },
-                ],
+                      beginAtZero: true
+                    }
+                  }
+                ]
               },
               tooltips: {
                 callbacks: {
-                  label: function (tooltipItem) {
+                  label: function(tooltipItem) {
                     return tooltipItem.yLabel?.toLocaleString("en-IN");
-                  },
-                },
-              },
-            },
+                  }
+                }
+              }
+            }
           };
           const pieConfig = {
             type: "pie",
@@ -82,10 +82,10 @@ export default defineComponent({
                     covidData.cases,
                     covidData.critical,
                     covidData.recovered,
-                    covidData.deaths,
-                  ],
-                },
-              ],
+                    covidData.deaths
+                  ]
+                }
+              ]
             },
             options: {
               responsive: true,
@@ -99,17 +99,17 @@ export default defineComponent({
                   }) COVID Data with Population (${covidData.population?.toLocaleString(
                     "en-IN"
                   )}) Distribution`,
-                  font: { weight: 700, size: 18 },
-                },
+                  font: { weight: 700, size: 18 }
+                }
               },
               tooltips: {
                 callbacks: {
-                  label: function (tooltipItem) {
+                  label: function(tooltipItem) {
                     return tooltipItem.yLabel?.toLocaleString("en-IN");
-                  },
-                },
-              },
-            },
+                  }
+                }
+              }
+            }
           };
           try {
             lineChart = new Chart(
@@ -136,7 +136,7 @@ export default defineComponent({
         });
     });
     return {};
-  },
+  }
 });
 </script>
 <style scoped>
@@ -145,7 +145,7 @@ export default defineComponent({
   height: 450px;
 }
 .chart-container-2 {
-  width: 60vw;
+  width: 55vw;
   height: 450px;
 }
 </style>
