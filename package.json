@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "@quasar/extras": "^1.11.2",
-    "axios": "^0.22.0",
+    "axios": "^0.24.0",
     "chart.js": "^3.5.1",
     "core-js": "^3.18.2",
     "vue": "^3.2.19",
