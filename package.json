@@ -21,8 +21,8 @@
     "axios": "^0.24.0",
     "chart.js": "^3.6.0",
     "core-js": "^3.19.0",
+    "quasar": "^2.2.1",
     "vue": "^3.2.20",
-    "quasar": "^2.1.2",
     "vue-router": "^4.0.12"
   },
   "devDependencies": {
