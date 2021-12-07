@@ -22,7 +22,7 @@
     "chart.js": "^3.6.0",
     "core-js": "^3.19.0",
     "quasar": "^2.2.1",
-    "vue": "^3.2.20",
+    "vue": "^3.2.24",
     "vue-router": "^4.0.12"
   },
   "devDependencies": {
