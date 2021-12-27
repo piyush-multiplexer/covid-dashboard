@@ -17,9 +17,9 @@
     }
   },
   "dependencies": {
-    "@quasar/extras": "^1.11.3",
+    "@quasar/extras": "^1.12.2",
     "axios": "^0.24.0",
-    "chart.js": "^3.6.0",
+    "chart.js": "^3.7.0",
     "core-js": "^3.19.0",
     "quasar": "^2.2.1",
     "vue": "^3.2.20",
@@ -27,8 +27,8 @@
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.14",
+    "@vue/cli-service": "~4.5.15",
     "@vue/cli-plugin-eslint": "~4.5.15",
-    "@vue/cli-service": "~4.5.14",
     "@vue/compiler-sfc": "^3.2.20",
     "babel-eslint": "^10.1.0",
     "eslint": "^8.1.0",
