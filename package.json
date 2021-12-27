@@ -20,7 +20,7 @@
     "@quasar/extras": "^1.12.2",
     "axios": "^0.24.0",
     "chart.js": "^3.6.0",
-    "core-js": "^3.19.0",
+    "core-js": "^3.20.1",
     "quasar": "^2.4.1",
     "vue": "^3.2.26",
     "vue-router": "^4.0.12"
