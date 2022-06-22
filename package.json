@@ -17,7 +17,7 @@
     }
   },
   "dependencies": {
-    "@quasar/extras": "^1.12.2",
+    "@quasar/extras": "^1.14.1",
     "axios": "^0.24.0",
     "chart.js": "^3.7.0",
     "core-js": "^3.20.1",
