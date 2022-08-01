@@ -33,7 +33,7 @@
     "babel-eslint": "^10.1.0",
     "eslint": "^8.20.0",
     "eslint-plugin-vue": "^9.3.0",
-    "husky": "^7.0.4",
+    "husky": "^8.0.1",
     "lint-staged": "^12.1.4",
     "sass": "^1.54.0",
     "sass-loader": "^10.1.1",
