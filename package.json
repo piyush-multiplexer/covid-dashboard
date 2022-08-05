@@ -36,7 +36,7 @@
     "lint-staged": "^13.0.3",
     "husky": "^8.0.1",
     "sass-loader": "^13.0.2",
-    "sass": "^1.54.2",
+    "sass": "^1.54.3",
     "vue-cli-plugin-quasar": "^5.0.1"
   },
   "browserslist": [
